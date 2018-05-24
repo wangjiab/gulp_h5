@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="在幼儿园这样用思维导图，知道的人少之又少" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/main.css">
-    <script src="./js/index.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.css">
 </head>
+
 <body>
-   
+    <div class="page-loading">
+        <div class="spinner"></div>
+    </div>
+
+    <div id="fullpage" style="display:none">
+        <div class="section">
+            <div class="imgctndv">
+                <img src="./images/7.png" class="bg-img" />
+            </div>
+        </div>
+        <div class="section">
+            <div class="imgctndv">
+                <img src="./images/8.png" class="bg-img" />
+            </div>
+        </div>
+        <div class="section">
+            <div class="imgctndv">
+                <img src="./images/19.png" class="bg-img" />
+            </div>
+        </div>
+
+    </div>
+    <div id="down">
+        <canvas id="downCanvas" width="50" height="50">你的浏览器不支持canvas，请下载更新版本的浏览器
+        </canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.js"></script>
+    <script src="./js/index.js"></script>
 </body>
+
 </html>

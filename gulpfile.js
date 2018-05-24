@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     pngquant = require('imagemin-pngquant'), // 深度压缩  
     htmlMin = require('gulp-htmlmin'),//压缩html  
     changed = require('gulp-changed'),//检查改变状态  
-    less = require('gulp-less'),//压缩合并less  
+    sass = require("gulp-sass"),//压缩scss文件
     del = require('del'),
     browserSync = require("browser-sync").create();//浏览器实时刷新  
 
@@ -37,10 +37,10 @@ gulp.task('html', function () {
 });
 
 //实时编译less  
-gulp.task('less', function () {
-    gulp.src(['./src/less/*.less']) //多个文件以数组形式传入  
+gulp.task('scss', function () {
+    gulp.src(['./src/scss/*.scss']) //多个文件以数组形式传入  
         .pipe(changed('dist/css', { hasChanged: changed.compareSha1Digest }))
-        .pipe(less())//编译less文件  
+        .pipe(sass())//编译less文件  
         .pipe(concat('main.css'))//合并之后生成main.css  
         .pipe(cleanCSS())//压缩新生成的css  
         .pipe(gulp.dest('dist/css'))//将会在css下生成main.css  
@@ -72,7 +72,7 @@ gulp.task('images', ['deleteImages'], function () {
 
 //启动热更新  
 gulp.task('serve', ['delete', 'images'], function () {
-    gulp.start('script', 'less', 'html');
+    gulp.start('script', 'scss', 'html');
     browserSync.init({
         port: 2017,
         server: {
@@ -80,7 +80,7 @@ gulp.task('serve', ['delete', 'images'], function () {
         }
     });
     gulp.watch('src/js/*.js', ['script']);         //监控文件变化，自动更新  
-    gulp.watch('src/less/*.less', ['less']);
+    gulp.watch('src/scss/*.scss', ['scss']);
     gulp.watch('src/*.html', ['html']);
     gulp.watch('src/images/*.*', ['images']);
 });
