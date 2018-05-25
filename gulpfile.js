@@ -19,6 +19,10 @@ gulp.task('deleteImages', function (cb) {
     return del(['dist/images/*.*'], cb);
 })
 
+gulp.task('copy', function () {
+    gulp.src('src/lib/*.*')
+        .pipe(gulp.dest('dist/lib'))
+});
 //压缩html  
 gulp.task('html', function () {
     var options = {
@@ -71,7 +75,7 @@ gulp.task('images', ['deleteImages'], function () {
 });
 
 //启动热更新  
-gulp.task('serve', ['delete', 'images'], function () {
+gulp.task('serve', ['delete', 'images', 'copy'], function () {
     gulp.start('script', 'scss', 'html');
     browserSync.init({
         port: 2017,

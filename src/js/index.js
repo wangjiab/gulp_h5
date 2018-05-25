@@ -8,10 +8,21 @@ $(document).ready(function () {
         setTimeout(function () {
             $("#fullpage").fadeIn();
             $(".page-loading").hide();
-            onLoad();
+            onShare();
         }, 800)
     })
-    onShare();
+    onLoad();
+    var OrderNum = 53;
+  
+    OrderNum = OrderNum + Math.floor(timeLong() / 3)
+     $(".order").text(OrderNum)
+    // //没分钟去刷新数据
+    setInterval(function () {
+        //timeLong() / 3
+        OrderNum = OrderNum + Math.floor(1)
+        $(".order").text(OrderNum)
+    }, 6000)
+
 })
 function onLoad() {
     $('#fullpage').fullpage({
@@ -24,13 +35,7 @@ function onLoad() {
                 $(".footer").css("display", "inline-block");
                 $(".footer").addClass("slideInUp")
             }
-        },
-        // afterLoad: function (anchorLink, index) {
-        //     if (index !== 1) {
-
-        //     }
-
-        // }
+        }
     });
     var a = [
         { "name": "陈*", "phoneNo": "186****0688" },
@@ -57,7 +62,7 @@ function onLoad() {
         { "name": "周*龙", "phoneNo": "153****6560" },
         { "name": "吴*玮", "phoneNo": "186****7371" },
         { "name": "吴*", "phoneNo": "131****9672" },
-        { "name": "吴*", "phoneNo": "135****8337" },
+        { "name": "陈*", "phoneNo": "135****8337" },
         { "name": "曾*志", "phoneNo": "134****3349" },
         { "name": "杨*", "phoneNo": "158****6056" },
         { "name": "王*", "phoneNo": "185****0613" },
@@ -65,11 +70,11 @@ function onLoad() {
         { "name": "田*琳", "phoneNo": "186****8601" },
         { "name": "郭*星", "phoneNo": "137****8287" },
         { "name": "李*", "phoneNo": "159****4526" },
-        { "name": "高*琛", "phoneNo": "188****3377" },
-        { "name": "陈*霖", "phoneNo": "188****3377" },
+        { "name": "高*琛", "phoneNo": "158****0472" },
+        { "name": "陈*霖", "phoneNo": "159****1559" },
         { "name": "刘*", "phoneNo": "188****3377" },
         { "name": "江*萍", "phoneNo": "139****8251" },
-        { "name": "江*萍", "phoneNo": "181****9757" },
+        { "name": "张*维", "phoneNo": "181****9757" },
         { "name": "马*芸", "phoneNo": "133****1521" },
         { "name": "李*", "phoneNo": "139****8376" },
         { "name": "刘*", "phoneNo": "134****4484" },
@@ -225,28 +230,20 @@ function onLoad() {
         { "name": "连*顺", "phoneNo": "180****9186" },
         { "name": "刘*鑫", "phoneNo": "136****2053" },
         { "name": "梁*伟", "phoneNo": "138****1320" },
-        { "name": "徐*晶", "phoneNo": "137****8612" },
+        { "name": "徐*晶", "phoneNo": "137****8612" }
 
     ]
+
     scrollName(a);
     scrollName2(a);
 }
 function insertDOM(a) {
-    var OrderNum = 53;
-    OrderNum = OrderNum + Math.floor(timeLong() / 3)
-    //没分钟去刷新数据
-    setInterval(function () {
-        //timeLong() / 3
-        OrderNum = OrderNum + Math.floor(1)
-        $(".order").text(OrderNum)
-
-    }, 6000)
 
     for (var i = 0; i < a.length; i++) {
         if (a[i].name.length == 2) {
             a[i].name = a[i].name + "&emsp;"
         }
-        var $li = $("<li><span class='curstomName'>" + a[i].name + "</span><span class='phoneNo'>" + a[i].phoneNo + " 已下单，</span><span>" + '共有<span class="order">' + OrderNum + '</span>人下单' + "</span></li>");
+        var $li = $("<li><span class='curstomName'>" + a[i].name + "</span><span class='phoneNo'>" + a[i].phoneNo + " 已下单，</span><span>" + '共有<span class="order">53</span>人下单' + "</span></li>");
         $("ul").append($li)
     }
 }
@@ -296,8 +293,8 @@ function scrollName2(a) {
 function onShare() {
     webChar = {};
     webChartitle = document.title;
-    webChardesc = document.querySelector('meta[name="description"]').getAttribute('content')
-    webCharImg = "http://app.iqeq.cn/wch5/content/images/shareImg.jpg"//location.href.split("index.html")[0] + $("#webCharImg").attr("src");
+    webChardesc = document.querySelector('meta[name="description"]').getAttribute('content');
+    webCharImg = "http://resimg.iqeq01.com/webapires/ol/2018/5/25/ENaykCXRBxXWDa7s8mmRWDCf6FpxwMBE.png";
     $.ajax({
         url: 'http://union.iqeq.cn/api/Other/CreateWinXinSign',
         type: 'get',
@@ -421,15 +418,27 @@ function loadImages(sources, callback) {
 }
 //计算时间差
 function timeLong() {
-    var dt1 = "2018-05-25 12:00";
-    var dt2 = fomatTime(new Date());
-    var regTime = /(\d{4})-(\d{1,2})-(\d{1,2})( \d{1,2}:\d{1,2})/g;
-    //alert(dt1.replace(regTime, "$2-$3-$1$4"));
-    var interval = Math.abs(Date.parse(dt1.replace(regTime, "$2-$3-$1$4")) - Date.parse(dt2.replace(regTime, "$2-$3-$1$4"))) / 1000;
-    var h = Math.floor(interval / 3600);
-    // console.log(h);
-    return h
-    //  var m = Math.floor(interval % 3600 / 60);
+    var d1="2018-05-25 12:00:00";
+     var dateBegin = new Date(d1.replace(/-/g, "/"));//将-转化为/，使用new Date
+    var dateEnd = new Date();//获取当前时间
+    var dateDiff = dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
+    var dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000));//计算出相差天数
+    var leave1=dateDiff%(24*3600*1000)    //计算天数后剩余的毫秒数
+    var hours=Math.floor(leave1/(3600*1000))//计算出小时数
+    //计算相差分钟数
+    var leave2=leave1%(3600*1000)    //计算小时数后剩余的毫秒数
+    var minutes=Math.floor(leave2/(60*1000))//计算相差分钟数
+    //计算相差秒数
+    var leave3=leave2%(60*1000)      //计算分钟数后剩余的毫秒数
+    var seconds=Math.round(leave3/1000)
+    // console.log(" 相差 "+dayDiff+"天 "+hours+"小时 "+minutes+" 分钟"+seconds+" 秒")
+    // console.log(dateDiff+"时间差的毫秒数",dayDiff+"计算出相差天数",leave1+"计算天数后剩余的毫秒数"
+    //     ,hours+"计算出小时数",minutes+"计算相差分钟数",seconds+"计算相差秒数");
+    return hours;
+
+    // alert(" 相差 " + days + "天 " + hours + "小时 " + minutes + " 分钟" + seconds + " 秒")
+
+
 }
 //格式化时间
 
