@@ -1,8 +1,100 @@
 @import "./_function.scss";
 @import "./_reset.scss";  
-.bg-img{
-    width: 100%;
+html,body{
+    height: 100%;
 }
+.imgctndv {
+  width: 100%;
+  height: 100%;
+}
+
+.imgctndv .bg-img {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+section{
+  position: relative;
+}
+.container2{
+   position: absolute;
+  width: 100%;
+  top:rem(52);
+  left: 0px;
+  display: inline-block;
+ // background-color: gray;
+}
+.container,.container2 {
+  position: absolute;
+  width: 100%;
+  top:rem(46);
+  left: 0px;
+  display: inline-block;
+  text-align: center;
+  ul,li {
+      margin: 0;
+      padding: 0;
+  }
+ 
+  .libox{
+      height: 100%;
+      text-align: center;
+      overflow: hidden;
+       display: inline-block;
+      border:1px #779A9A solid;
+      width: rem(556);
+      border-radius: 6px;
+      ul{
+        position: relative;
+        top:0px;
+        transition: all 0.2s;
+        display: inline-block;
+        height: 100%;
+      }
+      li {
+      text-align: center;
+      vertical-align: middle;
+      color: #666;
+      list-style: none;
+      font-size: 13.2px;
+      display: flex;
+      align-items: center;
+      .curstomName{
+        width: rem(65);
+        text-align: justify;
+      }
+      .phoneNo{
+        padding-left: rem(23);
+      }
+    }
+  }
+}
+
+.container{
+   li {
+      height: 20%;
+   }
+}
+.container2{
+   li {
+      height: 25%;
+    
+   }
+}
+
+
+.footer{
+    height: rem(89);
+    background-color: #E6380D;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    line-height: rem(90);
+    color:white;
+}
+
 .page-loading{
 	position: absolute;
 	top:0px;

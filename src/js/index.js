@@ -3,22 +3,73 @@
  */
 $(document).ready(function () {
     $('#fullpage').fullpage({
-        scrollingSpeed: 1000
+        scrollingSpeed: 700,
+        onLeave: function (index, nextIndex, direction) {
+            if (nextIndex === 1) {
+                $(".footer").hide();
+            }
+        },
+        afterLoad: function (anchorLink, index) {
+            if (index !== 1) {
+                $(".footer").show();
+            }
+           
+        }
     });
+     scrollName();
 
 
-    var sources = ['./images/7.png', './images/8.png', './images/19.png']
+    var sources = ['./images/page1.png', './images/page2.png', './images/page3.png', './images/page4.png', './images/page5.png', './images/page6.png', './images/page7.png', './images/page8.png']
     loadImages(sources, function () {
         setTimeout(function () {
             $("#fullpage").fadeIn();
+            // $(".footer").fadeIn();
             $(".page-loading").hide();
         }, 800)
     })
-
-
     return false;
     onShare();
 })
+//滚动名单
+function scrollName() {
+    clearInterval(timer)
+    var a = [
+        { name: "陈*", phoneNo: "186****0688" },
+        { name: "晋*建", phoneNo: "159****7891" },
+        { name: "蔡*峰", phoneNo: "137****3523" },
+        { name: "翁*", phoneNo: "159****0446" },
+        { name: "叶*辉", phoneNo: "182****3561" },
+        { name: "李*悦", phoneNo: "133****5862" },
+        { name: "阮*蕊", phoneNo: "137****1352" },
+        { name: "潘*红", phoneNo: "159****2989" },
+        { name: "郭*冰", phoneNo: "189****3705" },
+        { name: "徐*锦", phoneNo: "137****2627" }
+    ]
+    var timer = null
+    for (var i = 0; i < a.length; i++) {
+        if (a[i].name.length == 2) {
+            a[i].name = a[i].name + "&emsp;"
+        }
+        var $li = $("<li><span class='curstomName'>" + a[i].name + "</span><span class='phoneNo'>" + a[i].phoneNo + " 已下单，</span><span>" + '共有296人下单' + "</span></li>");
+        $("ul").append($li)
+    }
+    var box = document.getElementById("test");
+    var height = document.getElementById("test").style.height;
+    var liHeight = 20;
+    var forNum = a.length - 6
+    var position = 0;
+    //return false;
+    timer = setInterval(function () {
+        console.log("xxx")
+        position = position - liHeight
+        $("ul").css({ "top": position + "%" })
+        forNum--
+        if (forNum == -1) {
+            forNum = a.length - 6
+            position = 20;
+        }
+    }, 2000);
+}
 //分享链接名片
 function onShare() {
     webChar = {};
