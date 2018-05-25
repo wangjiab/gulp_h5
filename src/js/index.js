@@ -13,15 +13,15 @@ $(document).ready(function () {
     })
     onLoad();
     var OrderNum = 53;
-   // console.log(timeLong())
     OrderNum = OrderNum + Math.floor(timeLong() / 3)
     $(".order").text(OrderNum)
     // //没分钟去刷新数据
     setInterval(function () {
         //timeLong() / 3
-        OrderNum = OrderNum + 1
-        $(".order").text(OrderNum)
-    }, 3600000)
+       OrderNum= 53 + Math.floor(timeLong() / 3)
+       
+     $(".order").text(OrderNum)
+    }, 60000)
 
 })
 function onLoad() {
